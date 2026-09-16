@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Rekapitulasi Laporan TBM Terintegrasi</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: #f8fafc; color: #1e293b; padding-bottom: 60px; -webkit-font-smoothing: antialiased; }
+        
+        /* Header dengan background gambar banner dan lapisan gelap yang lebih transparan */
+        .top-header { 
+            background: linear-gradient(rgba(9, 13, 22, 0.40), rgba(15, 23, 42, 0.50)), url('images/banner.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            color: #ffffff; 
+            padding: 56px 20px; 
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2); 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .header-content { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+        .logos-row { margin-bottom: 20px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; align-items: center; }
+        
+        /* Wadah logo */
+        .logo-box { display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); height: 55px; }
+        .logo-box img { max-height: 38px; width: auto; object-fit: contain; display: block; }
+        
+        .title-box h1 { font-size: 26px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        .title-box p { font-size: 12px; color: #38bdf8; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .page-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .intro-heading { text-align: center; margin-bottom: 36px; }
+        .intro-heading h2 { font-size: 22px; color: #0f172a; font-weight: 800; }
+        .intro-heading p { font-size: 13px; color: #64748b; margin-top: 6px; }
+        
+        .section-divider-title { font-size: 12px; color: #475569; text-transform: uppercase; font-weight: 700; letter-spacing: 1.2px; margin: 40px 0 16px 0; display: flex; align-items: center; gap: 10px; }
+        .section-divider-title::before { content: ''; display: inline-block; width: 4px; height: 16px; background: #1e3a8a; border-radius: 2px; }
+        
+        .block-row-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -2px rgba(0,0,0,0.01); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .block-row-card:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -3px rgba(0,0,0,0.06), 0 4px 6px -4px rgba(0,0,0,0.06); border-color: #cbd5e1; }
+        
+        .card-header-group { display: flex; align-items: center; margin-bottom: 12px; }
+        .card-icon-badge { display: inline-flex; align-items: center; justify-content: center; font-size: 18px; background: #f0fdf4; border: 1px solid #dcfce7; width: 42px; height: 42px; border-radius: 12px; margin-right: 14px; flex-shrink: 0; }
+        .card-title-text { font-size: 16px; color: #0f172a; font-weight: 700; letter-spacing: -0.2px; }
+        
+        .card-desc-p { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 20px; padding-left: 56px; }
+        
+        .form-split-buttons { display: block; width: 100%; padding-left: 56px; }
+        .btn-split { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 20px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 10px; text-align: center; color: #ffffff; margin-bottom: 10px; border: none; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        @media (min-width: 500px) {
+            .form-split-buttons { display: flex; gap: 12px; }
+            .btn-split { margin-bottom: 0; flex: 1; }
+        }
+        
+        .wika-btn-bg { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
+        .wika-btn-bg:hover { background: linear-gradient(135deg, #0369a1 0%, #075985 100%); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+        
+        .gi-btn-bg { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .gi-btn-bg:hover { background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+        
+        .btn-split:hover { transform: translateY(-1px); }
+        
+        .proyek-footer { background-color: #090d16; color: #64748b; padding: 36px 20px; text-align: center; border-top: 1px solid #1e293b; margin-top: 60px; }
+        .k3-capsule { display: inline-block; background-color: rgba(220, 38, 38, 0.15); border: 1px solid rgba(220, 38, 38, 0.3); color: #f87171; font-size: 11px; font-weight: 700; padding: 6px 20px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+        .proyek-footer p { font-size: 12px; }
+        .proyek-footer span { color: #f1f5f9; font-weight: 600; }
+
+        @media (max-width: 600px) {
+            .card-desc-p, .form-split-buttons { padding-left: 0; }
+            .card-icon-badge { margin-right: 10px; width: 36px; height: 36px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-content">
+            <div class="logos-row">
+                <div class="logo-box">
+                    <img src="images/logo-wika.png" alt="Logo PT WIKA (Persero) Tbk">
+                </div>
+                <div class="logo-box">
+                    <img src="images/logo-gi.png" alt="Logo PT Girder Indonesia">
+                </div>
+            </div>
+            <div class="title-box">
+                <h1>REKAPITULASI LAPORAN TOOLBOX MEETING</h1>
+                <p>Sistem Pelaporan TBM Digital</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="intro-heading">
+            <h2>Menu Utama Pelaporan</h2>
+            <p>Pilih menu di bawah ini untuk mengakses fitur sistem pelaporan</p>
+        </div>
+
+        <div class="section-divider-title">Aktivitas Laporan &amp; Monitoring</div>
+        
+        <!-- Menu 1: Input Laporan -->
+        <div class="block-row-card">
+            <div class="card-header-group">
+                <span class="card-icon-badge">📄</span>
+                <h3 class="card-title-text">1. Input Laporan Baru</h3>
+            </div>
+            <p class="card-desc-p">Buat dan kirim laporan baru Tool Box Meeting melalui tautan formulir online resmi masing-masing kontraktor.</p>
+            <div class="form-split-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdm5Rwn3rccYRXwNvqeOQtUgVFOobT1citGgzJLtsNpdqdmkg/viewform?usp=dialog" target="_blank" class="btn-split wika-btn-bg">
+                    Formulir PT WIKA &nearr;
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScYf9bt4Xsxp2OYibQr0werORtrmQWRh3lGlb9zxeVYQcFPyw/viewform?usp=dialog" target="_blank" class="btn-split gi-btn-bg">
+                    Formulir PT GI &nearr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Menu 2: Monitoring Rekap -->
+        <div class="block-row-card">
+            <div class="card-header-group">
+                <span class="card-icon-badge">👁️</span>
+                <h3 class="card-title-text">2. Monitoring Hasil Rekapitulasi</h3>
+            </div>
+            <p class="card-desc-p">Buka pangkalan data awan terpusat untuk meninjau atau mengecek validitas berkas pelaporan harian yang telah terkirim.</p>
+            <div class="form-split-buttons">
+                <a href="https://docs.google.com/spreadsheets/d/1K0tMAKdsEgx48A0wJdzVE_MNluPkH2Dd34JZDgDNr7U/edit?usp=sharing" target="_blank" class="btn-split wika-btn-bg">
+                    Buka Rekap PT WIKA &nearr;
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1vGkQ2bzvzSKS9Q-BvyNYrTMrCm5slV4cLcAZu_QAB9Q/edit?usp=sharing" target="_blank" class="btn-split gi-btn-bg">
+                    Buka Rekap PT GI &nearr;
+                </a>
+            </div>
+        </div>
+
+        <div class="section-divider-title">Dashboard Cetak &amp; Arsip</div>
+
+        <!-- Menu 3: Unduh PDF Instan -->
+        <div class="block-row-card">
+            <div class="card-header-group">
+                <span class="card-icon-badge">🖨️</span>
+                <h3 class="card-title-text">3. Unduh Dokumen PDF Otomatis</h3>
+            </div>
+            <p class="card-desc-p">Klik tombol di bawah untuk langsung mengunduh laporan harian ke dalam format PDF secara bersih dan instan.</p>
+            <div class="form-split-buttons">
+                <a href="https://docs.google.com/spreadsheets/d/1K0tMAKdsEgx48A0wJdzVE_MNluPkH2Dd34JZDgDNr7U/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true" target="_blank" class="btn-split wika-btn-bg">
+                    Unduh PDF PT WIKA &darr;
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1vGkQ2bzvzSKS9Q-BvyNYrTMrCm5slV4cLcAZu_QAB9Q/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true" target="_blank" class="btn-split gi-btn-bg">
+                    Unduh PDF PT GI &darr;
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="proyek-footer">
+        <div class="k3-capsule">SAFETY COMMITMENT FIRST</div>
+        <p>Dashboard Terintegrasi Tool Box Meeting (TBM) &copy; 2026 <span>Harbour Road II</span></p>
+    </footer>
+
+</body>
+</html>
