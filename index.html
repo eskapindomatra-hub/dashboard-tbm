@@ -8,7 +8,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: #f8fafc; color: #1e293b; padding-bottom: 60px; -webkit-font-smoothing: antialiased; }
         
-        /* Header dengan background gambar banner dan lapisan gelap yang lebih transparan */
         .top-header { 
             background: linear-gradient(rgba(9, 13, 22, 0.40), rgba(15, 23, 42, 0.50)), url('images/banner.jpg'); 
             background-size: cover; 
@@ -24,7 +23,6 @@
         .header-content { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
         .logos-row { margin-bottom: 20px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; align-items: center; }
         
-        /* Wadah logo */
         .logo-box { display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); height: 55px; }
         .logo-box img { max-height: 38px; width: auto; object-fit: contain; display: block; }
         
@@ -57,10 +55,10 @@
         }
         
         .wika-btn-bg { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
-        .wika-btn-bg:hover { background: linear-gradient(135deg, #0369a1 0%, #075985 100%); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+        .wika-btn-bg:hover { background: linear-gradient(135deg, #0369a1 100%, #075985 100%); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
         
         .gi-btn-bg { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
-        .gi-btn-bg:hover { background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+        .gi-btn-bg:hover { background: linear-gradient(135deg, #b91c1c 100%, #991b1b 100%); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
         
         .btn-split:hover { transform: translateY(-1px); }
         
@@ -138,18 +136,19 @@
 
         <div class="section-divider-title">Dashboard Cetak &amp; Arsip</div>
 
-        <!-- Menu 3: Unduh PDF Instan -->
+        <!-- Menu 3: Unduh PDF Instan (Hanya Sheet 2 / Rekap_Harian) -->
         <div class="block-row-card">
             <div class="card-header-group">
                 <span class="card-icon-badge">🖨️</span>
-                <h3 class="card-title-text">3. Unduh Dokumen PDF Otomatis</h3>
+                <h3 class="card-title-text">3. Unduh Dokumen PDF Otomatis (Sheet Rekap_Harian)</h3>
             </div>
-            <p class="card-desc-p">Klik tombol di bawah untuk langsung mengunduh laporan harian ke dalam format PDF secara bersih dan instan.</p>
+            <p class="card-desc-p">Klik tombol di bawah untuk mengunduh khusus Sheet 2 (Rekap_Harian) ke dalam format PDF secara bersih dan instan.</p>
             <div class="form-split-buttons">
-                <a href="https://docs.google.com/spreadsheets/d/1K0tMAKdsEgx48A0wJdzVE_MNluPkH2Dd34JZDgDNr7U/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true" target="_blank" class="btn-split wika-btn-bg">
+                <!-- Tambahkan parameter gid=ID_SHEET_REKAP_HARIAN pada link export -->
+                <a href="https://docs.google.com/spreadsheets/d/1K0tMAKdsEgx48A0wJdzVE_MNluPkH2Dd34JZDgDNr7U/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true&gid=700231307" target="_blank" class="btn-split wika-btn-bg">
                     Unduh PDF PT WIKA &darr;
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1vGkQ2bzvzSKS9Q-BvyNYrTMrCm5slV4cLcAZu_QAB9Q/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true" target="_blank" class="btn-split gi-btn-bg">
+                <a href="https://docs.google.com/spreadsheets/d/1vGkQ2bzvzSKS9Q-BvyNYrTMrCm5slV4cLcAZu_QAB9Q/export?format=pdf&size=7&portrait=false&fitw=true&gridlines=true&gid=427401085" target="_blank" class="btn-split gi-btn-bg">
                     Unduh PDF PT GI &darr;
                 </a>
             </div>
